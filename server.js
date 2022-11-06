@@ -19,22 +19,22 @@ app.use(cors({
 
 
 
-app.get("/", function (req, res) {
-    res.send("Hello World");
-})
+// app.get("/", function (req, res) {
+//     res.send("Hello World");
+// })
 
-app.post("/", function (req, res) {
+// app.post("/", function (req, res) {
 
-  res.send("This is a post Request");
-})
+//   res.send("This is a post Request");
+// })
 
-app.get("/users", (req, res) => {
+app.get("/", (req, res) => {
     //fetch all users
     //send user array as response to the client
     return res.json(users)
 })
 
-app.post("/users", (req, res) => {
+app.post("/", (req, res) => {
     const { operation_type } = req.body;
     let getNumber = operation_type.match(/\d+/g)
     let getAdd = operation_type.match(/add/gi)
