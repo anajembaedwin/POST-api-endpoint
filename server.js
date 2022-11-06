@@ -37,15 +37,19 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
     const { operation_type } = req.body;
     let getNumber = operation_type.match(/\d+/g)
-    let getAdd = operation_type.match(/add/gi)
-    let getSubtract = operation_type.match(/subtract/gi)
-    let getMultiply = operation_type.match(/multiply/gi)
+
     let x = Number(getNumber[0]);
     let y = Number(getNumber[1]);
     let result;
-    let operation = operation_type.match(/(add?[^\s]+)|(subtract?[^\s]+)|(multiply?[^\s]+)/g)[0]
+    let getOperation = operation_type.match(/(add?[^\s]+)|(addition?[^\s]+)|(subtract?[^\s]+)|(subtraction?[^\s]+)|(multiply?[^\s]+)|(multiplication?[^\s]+)/gi)
+    let operation = getOperation[0]
+  
     switch (operation) {
         case "add": {
+            result = x + y;
+            break;
+        }
+        case "addition": {
             result = x + y;
             break;
         }
@@ -53,7 +57,15 @@ app.post("/", (req, res) => {
             result = x - y;
             break;
         }
+        case "subtraction": {
+            result = x - y;
+            break;
+        }
         case "multiply": {
+            result = x * y;
+            break;
+        }
+        case "multiplication": {
             result = x * y;
             break;
         }
@@ -65,12 +77,12 @@ app.post("/", (req, res) => {
 
     users.push(req.body);
 
-    // let stringedData = JSON.stringify(users, null, 2)
-    // fs.writeFile("users.json", stringedData, function(err) {
-    //     if (err) {
-    //         return res.status(500).json({message: err})
-    //     }
-    // })
+    let stringedData = JSON.stringify(users, null, 2)
+    fs.writeFile("users.json", stringedData, function(err) {
+        if (err) {
+            return res.status(500).json({message: err})
+        }
+    })
 
     return res.json({"slackUsername": "iSommie", "result": result,  "operation_type": operation})
 })
