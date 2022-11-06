@@ -8,6 +8,8 @@ const cors = require('cors');
 const users = require('./users.json')
 const fs = require('fs');
 
+
+
 app.use(express.json()); // for parsing application/json
 
 app.use(cors({
@@ -15,11 +17,7 @@ app.use(cors({
 }));
 
 
-app.get("/", (req, res) => {
-    //fetch all users
-    //send user array as response to the client
-    return res.json(users)
-})
+
 
 app.post("/", (req, res) => {
     const { operation_type } = req.body;
@@ -75,19 +73,24 @@ app.post("/", (req, res) => {
 
 
     
-
+    res.setHeader('Content-Type', 'application/json');
     let stringedData = JSON.stringify(users, null, 2)
     fs.writeFile("users.json", stringedData, function(err) {
         if (err) {
-            return res.status(500).json({message: err})
+            return res.json({message: err})
         }
     })
 
-    let user = {"slackUsername": "iSommie", "result": result,  "operation_type": operation}
+    let user = {"slackUsername": "iSommie", "result": result, "operation_type": operation}
     users.push(user);
     return res.send(user)
 })
 
+app.get("/", (req, res) => {
+    //fetch all users
+    //send user array as response to the client
+    return res.json(users)
+})
 
 const PORT = process.env.PORT || 3000;
 
