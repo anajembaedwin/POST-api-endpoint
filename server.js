@@ -35,13 +35,13 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", (req, res) => {
-    const { operation_type } = req.body;
-    let getNumber = operation_type.match(/\d+/g)
+    const { operator_type } = req.body;
+    let getNumber = operator_type.match(/\d+/g)
 
     let x = Number(getNumber[0]);
     let y = Number(getNumber[1]);
     let result;
-    let getOperation = operation_type.match(/(add?[^\s]+)|(addition?[^\s]+)|(subtract?[^\s]+)|(subtraction?[^\s]+)|(multiply?[^\s]+)|(multiplication?[^\s]+)/gi)
+    let getOperation = operator_type.match(/(add?[^\s]+)|(addition?[^\s]+)|(subtract?[^\s]+)|(subtraction?[^\s]+)|(multiply?[^\s]+)|(multiplication?[^\s]+)/gi)
     let operation = getOperation[0]
   
     switch (operation) {
@@ -84,7 +84,7 @@ app.post("/", (req, res) => {
         }
     })
 
-    return res.json({"slackUsername": "iSommie", "result": result,  "operation_type": operation})
+    return res.json({"slackUsername": "iSommie", "result": result,  "operator_type": operation})
 })
 
 const PORT = process.env.PORT || 3000;
