@@ -10,10 +10,8 @@ const users = require('./users.json')
 const fs = require('fs');
 
 app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded());
 
 app.use(cors({
-    methods: ['POST'],
     origin: '*'
 }));
 
@@ -77,12 +75,12 @@ app.post("/", (req, res) => {
 
     users.push(req.body);
 
-    // let stringedData = JSON.stringify(users, null, 2)
-    // fs.writeFile("users.json", stringedData, function(err) {
-    //     if (err) {
-    //         return res.status(500).json({message: err})
-    //     }
-    // })
+    let stringedData = JSON.stringify(users, null, 2)
+    fs.writeFile("users.json", stringedData, function(err) {
+        if (err) {
+            return res.status(500).json({message: err})
+        }
+    })
 
     return res.json({"slackUsername": "iSommie", "result": result,  "operator_type": operation})
 })
