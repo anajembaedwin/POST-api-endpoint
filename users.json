@@ -1,5 +1,17 @@
 [
   {
-    "slackUsername": "iSommie"
+    "slackUsername": "iSommie",
+    "result": 49,
+    "operator_type": "add"
+  },
+  {
+    "slackUsername": "iSommie",
+    "result": 49,
+    "operator_type": "add"
+  },
+  {
+    "slackUsername": "iSommie",
+    "result": 49,
+    "operator_type": "add"
   }
 ]
