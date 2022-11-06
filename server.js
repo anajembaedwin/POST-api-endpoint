@@ -65,14 +65,14 @@ app.post("/", (req, res) => {
 
     users.push(req.body);
 
-    let stringedData = JSON.stringify(users, null, 2)
-    fs.writeFile("users.json", stringedData, function(err) {
-        if (err) {
-            return res.status(500).json({message: err})
-        }
-    })
+    // let stringedData = JSON.stringify(users, null, 2)
+    // fs.writeFile("users.json", stringedData, function(err) {
+    //     if (err) {
+    //         return res.status(500).json({message: err})
+    //     }
+    // })
 
-    return res.status(200).json({"slackUsername": "iSommie", "result": result,  "operation_type": operation})
+    return res.json({"slackUsername": "iSommie", "result": result,  "operation_type": operation})
 })
 
 const PORT = process.env.PORT || 3000;
