@@ -41,19 +41,19 @@ app.post("/users", (req, res) => {
     let operation = operation_type;
     switch (operation_type) {
         case "add": {
-            result = x + y;
+            result = Number(x) + Number(y);
             break;
         }
         case "subtract": {
-            result = x - y;
+            result = Number(x) - Number(y);
             break;
         }
         case "multiply": {
-            result = x * y;
+            result = Number(x) * Number(y);
             break;
         }
         default: {
-            result = "No value found";
+            result = 0;
         }
     }
 
