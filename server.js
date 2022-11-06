@@ -35,27 +35,33 @@ app.get("/users", (req, res) => {
 })
 
 app.post("/users", (req, res) => {
-    const { operation_type, x, y } = req.body;
-
+    const { operation_type } = req.body;
+    let getNumber = operation_type.match(/\d+/g)
+    let getAdd = operation_type.match(/add/gi)
+    let getSubtract = operation_type.match(/subtract/gi)
+    let getMultiply = operation_type.match(/multiply/gi)
+    let x = Number(getNumber[0]);
+    let y = Number(getNumber[1]);
     let result;
-    let operation = operation_type;
-    switch (operation_type) {
+    let operation = operation_type.match(/(add?[^\s]+)|(subtract?[^\s]+)|(multiply?[^\s]+)/g)[0]
+    switch (operation) {
         case "add": {
-            result = Number(x) + Number(y);
+            result = x + y;
             break;
         }
         case "subtract": {
-            result = Number(x) - Number(y);
+            result = x - y;
             break;
         }
         case "multiply": {
-            result = Number(x) * Number(y);
+            result = x * y;
             break;
         }
         default: {
-            result = 0;
+            result = "No value found";
         }
     }
+
 
     users.push(req.body);
 
