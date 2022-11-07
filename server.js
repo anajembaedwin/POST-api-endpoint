@@ -19,7 +19,7 @@ app.use(cors({
 app.get("/", (req, res) => {
     //fetch all users
     //send user array as response to the client
-    res.type('json');
+    
     return res.json(users)
 })
 
@@ -76,17 +76,16 @@ app.post("/", (req, res) => {
         }
     }
 
-    let user = {"slackUsername": "iSommie", "result": result,  "operator_type": operation}
+    let user = {"slackUsername": "iSommie", "result": result,  "operation_type": operation}
     users.push(user)
     let stringedData = JSON.stringify(users, null, 2)
     fs.writeFile("users.json", stringedData, function(err) {
         if (err) {
-            return res.status(500).json({message: err})
+            return res.json({message: err})
         }
     })
 
     
-    res.type('json');
     
     return res.json(users)
 })
